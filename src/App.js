@@ -18,15 +18,15 @@ function App() {
   useEffect(()=>{
     pokeapi.get()
     .then(response => {
-      response.data.results.map(pokemon => {
+      response.data.results.map(pokemon => (
         pokeapi.get(pokemon.url)
           .then(poke => {
             pokemons.push(poke.data)
             setPokemons([...pokemons])
           })
-      })
+      ))
     })
-  })
+  }, [])
 
   function getPokemons(newPokemon){
     setCart(cart.concat(pokemons[newPokemon]))
