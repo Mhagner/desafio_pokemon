@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
 //import BootstrapTable from 'react'
-import axios from 'axios'
 
 import './App.css'
 
