@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
 //import BootstrapTable from 'react'
 
@@ -13,10 +13,41 @@ import pokeapi from './pokeApi'
 
 function App() {
  
+  const [pokemons, setPokemons] = useState([]) 
+
+
+
+  useEffect(()=>{
+    pokeapi.get()
+    .then(response => {
+      response.data.results.map(pokemon => {
+        pokeapi.get(pokemon.url)
+          .then(poke => {
+            pokemons.push(poke.data)
+            setPokemons([...pokemons])
+          })
+      })
+    })
+  }, [])
+
+ /*  function renderPokemons(){
+    const pokemon = pokemons || []
+    pokemon.map((poke, index) => {
+      <Col key={index} sm={3}>
+          <CardPoke
+            imagem={poke.sprites.front_default}
+            nome={poke.name}
+            descricao={15.60}
+            buscar={()=>getPokemons()}
+          />
+      </Col>
+    })
+  } */
+
+
 
   function getPokemons(){
-    pokeapi.get()
-      .then(response => console.log(response.data.results))
+    
   }
 
   return (
@@ -27,14 +58,16 @@ function App() {
         </Col>
       </Row>
       <Row className="espaco">
-        <Col sm={3}>
+     {pokemons.map((poke, index) => (
+      <Col key={index} sm={3}>
           <CardPoke
-            imagem={Imagem}
-            nome='Pikachu'
-            descricao="Descrição do pikachu"
+            imagem={poke.sprites.front_default}
+            nome={poke.name}
+            descricao={`R$ ${15.60}`}
             buscar={()=>getPokemons()}
           />
-        </Col>
+      </Col>
+     ))}
         <Col sm={3}>
           <CardCheckout
             tituloCabecalho="Meu Carrinho"
