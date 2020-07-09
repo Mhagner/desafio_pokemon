@@ -6,7 +6,6 @@ import './App.css'
 
 import Pesquisar from './Components/Pesquisar'
 import CardPoke from './Components/CardPoke'
-import Imagem from './Components/CardPoke/image/pikachu.jpg'
 import CardCheckout from './Components/CardCheckout'
 import pokeapi from './pokeApi'
 
@@ -27,7 +26,7 @@ function App() {
           })
       })
     })
-  }, [])
+  })
 
   function getPokemons(newPokemon){
     setCart(cart.concat(pokemons[newPokemon]))
