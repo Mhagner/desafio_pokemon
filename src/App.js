@@ -1,25 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Row, Container, Col } from 'react-bootstrap';
+//import BootstrapTable from 'react'
+import axios from 'axios'
+
+import './App.css'
+
+import Pesquisar from './Components/Pesquisar'
+import CardPoke from './Components/CardPoke'
+import Imagem from './Components/CardPoke/image/pikachu.jpg'
+import CardCheckout from './Components/CardCheckout'
+import pokeapi from './pokeApi'
+
 
 function App() {
+ 
+
+  function getPokemons(){
+    pokeapi.get()
+      .then(response => console.log(response.data.results))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid>
+      <Row className="espaco">
+        <Col sm="4">
+          <Pesquisar />
+        </Col>
+      </Row>
+      <Row className="espaco">
+        <Col sm={3}>
+          <CardPoke
+            imagem={Imagem}
+            nome='Pikachu'
+            descricao="Descrição do pikachu"
+            buscar={()=>getPokemons()}
+          />
+        </Col>
+        <Col sm={3}>
+          <CardCheckout
+            tituloCabecalho="Meu Carrinho"
+
+          />
+        </Col>
+      </Row> 
+    </Container>
   );
 }
 
