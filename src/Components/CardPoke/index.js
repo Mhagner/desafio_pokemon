@@ -4,7 +4,7 @@ import { Card, Button } from 'react-bootstrap'
 const CardPoke = ({ imagem, nome, descricao, buscar }) => {
     return (
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={imagem} />
+            <Card.Img variant="top" src={imagem} style={{ width: '200px'}} />
             <Card.Body>
                 <Card.Title>{nome}</Card.Title>
                 <Card.Text>

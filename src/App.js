@@ -12,10 +12,9 @@ import pokeapi from './pokeApi'
 
 
 function App() {
- 
+
   const [pokemons, setPokemons] = useState([]) 
-
-
+  const [cart, setCart] = useState([])
 
   useEffect(()=>{
     pokeapi.get()
@@ -30,24 +29,9 @@ function App() {
     })
   }, [])
 
- /*  function renderPokemons(){
-    const pokemon = pokemons || []
-    pokemon.map((poke, index) => {
-      <Col key={index} sm={3}>
-          <CardPoke
-            imagem={poke.sprites.front_default}
-            nome={poke.name}
-            descricao={15.60}
-            buscar={()=>getPokemons()}
-          />
-      </Col>
-    })
-  } */
-
-
-
-  function getPokemons(){
-    
+  function getPokemons(newPokemon){
+    setCart(cart.concat(pokemons[newPokemon]))
+    console.log(cart)
   }
 
   return (
@@ -58,16 +42,16 @@ function App() {
         </Col>
       </Row>
       <Row className="espaco">
-     {pokemons.map((poke, index) => (
-      <Col key={index} sm={3}>
-          <CardPoke
-            imagem={poke.sprites.front_default}
-            nome={poke.name}
-            descricao={`R$ ${15.60}`}
-            buscar={()=>getPokemons()}
-          />
-      </Col>
-     ))}
+          {pokemons.map((poke, index, newPokemon) => (
+            <Col key={index} sm={3}>
+                <CardPoke
+                  imagem={poke.sprites.front_default}
+                  nome={poke.name}
+                  descricao={`R$ ${15.60}`}
+                  buscar={()=>getPokemons(poke)}
+                />
+            </Col>
+          ))}
         <Col sm={3}>
           <CardCheckout
             tituloCabecalho="Meu Carrinho"
