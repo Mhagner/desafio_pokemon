@@ -26,7 +26,7 @@ function App() {
           })
       ))
     })
-  }, [])
+  })
 
   function getPokemons(newPokemon){
     setCart(cart.concat(pokemons[newPokemon]))
